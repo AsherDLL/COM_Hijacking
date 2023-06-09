@@ -2,8 +2,6 @@
 
 Author: **Asher Davila L.**
 
-_Python 3 script to ._
-
 ## Description:
 
 This script is written in Python 3 and is designed to automate the creation of missing registry keys for potential COM hijacking objects. It takes a CSV file obtained from ProcMon dumps as input and attempts to hijack the objects by creating the necessary registry entries.
