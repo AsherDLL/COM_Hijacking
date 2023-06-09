@@ -34,4 +34,4 @@ Create an [issue](https://github.com/AsherDLL/COM_Hijacking/issues) for feature 
 Submit a pull request for fixes and enhancements for this tool.
 
 ## License
-This plugin is released under an Apache 2.0 License.
+This plugin is released under an [Apache 2.0 License](https://github.com/AsherDLL/COM_Hijacking/blob/main/LICENSE).
