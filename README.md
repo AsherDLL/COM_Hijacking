@@ -29,7 +29,7 @@ Required packages: csv, os, re, shutil, winreg.
 ## Contributing
 Any feedback and any help from external maintainers are appreciated.
 
-Create an issue for feature requests or bugs that you have found.
+Create an [issue](https://github.com/AsherDLL/COM_Hijacking/issues) for feature requests or bugs that you have found.
 
 Submit a pull request for fixes and enhancements for this tool.
 
