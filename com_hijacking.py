@@ -10,6 +10,7 @@ import logging
 import re
 import shutil
 import winreg
+import pandas as pd
 
 from typing import Final
 logging.getLogger().setLevel(logging.INFO)
@@ -19,19 +20,8 @@ BLANK: Final[str] = " "
 DLL_DIRECTORY: Final[str] = "C:\\DLLs\\"
 
 def extract_column(csv_file, column_index)->list:
-    extracted_values = []
-    
-    with open(csv_file, 'r') as file:
-        reader = csv.reader(file)
-        
-        row_count = 0 
-
-        for row in reader:
-            if row_count != 0:
-                if len(row) > column_index:
-                    value = row[column_index].strip('"')
-                    extracted_values.append(value)
-            row_count += 1
+    reader = pd.read_csv(csv_file, usecols=[column_index])
+    extracted_values = reader['Path'].tolist()
     return extracted_values
 
 def create_registry_key(key_path, value_data)->None:
