@@ -7,10 +7,10 @@ Description: This script takes a CSV file of potential COM hijacking objects (ob
 
 import csv
 import logging
+import pandas as pd
 import re
 import shutil
 import winreg
-import pandas as pd
 
 from typing import Final
 logging.getLogger().setLevel(logging.INFO)
@@ -21,7 +21,9 @@ DLL_DIRECTORY: Final[str] = "C:\\DLLs\\"
 
 def extract_column(csv_file, column_index)->list:
     reader = pd.read_csv(csv_file, usecols=[column_index])
-    extracted_values = reader['Path'].tolist()
+    extracted_values = reader['Path']
+    extracted_values = extracted_values.str.replace('\w+(?=\\)', '', regex=True)
+    extracted_values = extracted_values.drop_duplicates().tolist()
     return extracted_values
 
 def create_registry_key(key_path, value_data)->None:
