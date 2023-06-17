@@ -7,6 +7,7 @@ Description: This script takes a CSV file of potential COM hijacking objects (ob
 
 import csv
 import logging
+import pandas as pd
 import re
 import shutil
 import winreg
@@ -19,19 +20,10 @@ BLANK: Final[str] = " "
 DLL_DIRECTORY: Final[str] = "C:\\DLLs\\"
 
 def extract_column(csv_file, column_index)->list:
-    extracted_values = []
-    
-    with open(csv_file, 'r') as file:
-        reader = csv.reader(file)
-        
-        row_count = 0 
-
-        for row in reader:
-            if row_count != 0:
-                if len(row) > column_index:
-                    value = row[column_index].strip('"')
-                    extracted_values.append(value)
-            row_count += 1
+    reader = pd.read_csv(csv_file, usecols=[column_index])
+    extracted_values = reader['Path']
+    extracted_values = extracted_values.str.replace('\w+(?=\\)', '', regex=True)
+    extracted_values = extracted_values.drop_duplicates().tolist()
     return extracted_values
 
 def create_registry_key(key_path, value_data)->None:
